@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Surat Maaf Dede</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: pink;
+      overflow: hidden;
+    }
+
+    .halaman {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      padding: 2rem;
+      text-align: center;
+      background: pink;
+    }
+
+    .halaman.active {
+      display: flex;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background: white;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+
+    #loveContainer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .love {
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: transform 0.3s, opacity 0.3s;
+      user-select: none;
+    }
+
+    .love.pop {
+      transform: scale(0);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Halaman 3 khusus */
+    #hal3 {
+      padding: 0;
+    }
+
+    .pesan-wrapper {
+      max-height: 80vh;
+      overflow-y: auto;
+      background: white;
+      padding: 2rem;
+      margin: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      font-size: 1.1rem;
+      line-height: 1.6;
+      text-align: left;
+      width: 90%;
+      max-width: 500px;
+    }
+
+    @media screen and (max-width: 480px) {
+      .pesan-wrapper {
+        font-size: 1rem;
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <audio id="bg-music" loop>
+    <source src="lagu.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Halaman 1 -->
+  <div class="halaman active" id="hal1">
+    <h1>sayang, dede mau ngomong sesuatu...</h1>
+    <button onclick="mulai()">mulai</button>
+  </div>
+
+  <!-- Halaman 2 -->
+  <div class="halaman" id="hal2">
+    <h2>pecahin semua love putih ini 🤍</h2>
+    <div id="loveContainer"></div>
+    <button id="btnLanjut" style="display:none" onclick="keHalaman3()">lanjut ➜</button>
+  </div>
+
+  <!-- Halaman 3 -->
+  <div class="halaman" id="hal3">
+    <div class="pesan-wrapper">
+      <p>
+        sayang, maafin dede ya, demi Allah byy, dede beneran ga ada niat buat bohongin abang.  
+        dede ga mikirin masa lalu dede lagi karena buat dede, masa lalu itu udah selesai sejak abang masuk ke hidup dede.  
+        sekarang yang dede lihat cuma abang, yang dede pikirin cuma abang, dan yang dede jaga adalah hatinya abang, bukan orang lain.  
+        <br><br>
+        soal yang tadi, dede beneran lupa, bukan karena dede nyembunyiin, tapi karena dede ngerasa itu udah ga penting lagi buat dede.  
+        yang penting sekarang adalah abang. dede cuma mau mencintai abang, setiap hari, tanpa jeda.  
+        <br><br>
+        oiya sayang, yang tadi dede bilang tentang akun bodong itu, sumpah dede beneran karena mantan dede yang lain emang pake akun itu.  
+        dede ga inget kenapa bisa 2 orang itu pake akun utama dede.  
+        <br><br>
+        dede minta maaf karena udah bikin abang ngerasa ga nyaman, padahal satu-satunya yang dede pengen adalah kamu ngerasa aman dan dicintai.  
+        dede janji akan lebih peka, lebih jujur, dan lebih hati-hati jaga hati abang.  
+        dede ga mau bikin abang sedih dan kecewa.  
+        <br><br>
+        abang tuh rumah buat hati dede, pelabuhan paling tenang yang pernah dede temuin, dan dede sayang banget sama abang.  
+        kalo dede bisa, dede bakal peluk abang sekarang, bisikin satu per satu rasa yang gak pernah bisa dede ketik utuh,  
+        yaitu:  
+        <br><br>
+        <b>"dede milik abang, dan dede gaa bakal kemana mana sayang" 🤍🤍🤍</b>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const musik = document.getElementById("bg-music");
+    const loveContainer = document.getElementById("loveContainer");
+    const btnLanjut = document.getElementById("btnLanjut");
+
+    function mulai() {
+      document.getElementById("hal1").classList.remove("active");
+      document.getElementById("hal2").classList.add("active");
+      musik.play();
+      generateLove();
+    }
+
+    function generateLove() {
+      for (let i = 0; i < 12; i++) {
+        const love = document.createElement("div");
+        love.classList.add("love");
+        love.textContent = "🤍";
+        love.addEventListener("click", () => {
+          love.classList.add("pop");
+          cekSemuaPecah();
+        });
+        loveContainer.appendChild(love);
+      }
+    }
+
+    function cekSemuaPecah() {
+      const semuaLove = document.querySelectorAll(".love");
+      const semuaPop = Array.from(semuaLove).every(l => l.classList.contains("pop"));
+      if (semuaPop) {
+        btnLanjut.style.display = "inline-block";
+      }
+    }
+
+    function keHalaman3() {
+      document.getElementById("hal2").classList.remove("active");
+      document.getElementById("hal3").classList.add("active");
+    }
+  </script>
+</body>
+</html>
